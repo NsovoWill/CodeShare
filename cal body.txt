@@ -1,0 +1,7 @@
+       Body = $"<b style=\"font-weight: 700;\">{StripHtmlTags(events.UserDisplayName)} </b>" +
+       $"<br\\> <b style=\"font-weight: 700;\">{StripHtmlTags(events.FirmName)} </b>" +
+       $"<br\\> New or Existing Firm: <b style=\"font-weight: 700;\">{StripHtmlTags(events.ExistingOrNewFirm)}</b> " +
+       $"<br\\> Requester Name: <b style=\"font-weight: 700;\">{StripHtmlTags(events.RequesterName)}</b> " +
+       $"<br\\> Request Description: <b style=\"font-weight: 700;\">{StripHtmlTags(events.RequestDescription)}</b>  " +
+       $"<br\\> Created By: <b style=\"font-weight: 700;\">{StripHtmlTags(events.CreatedBy)}</b> " +
+       $"<br\\> Created Date: <b style=\"font-weight: 700;\">{StripHtmlTags(events.CreatedDate.ToString())}</b>"
