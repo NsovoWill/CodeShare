@@ -5,3 +5,45 @@
        $"<br\\> Request Description: <b style=\"font-weight: 700;\">{StripHtmlTags(events.RequestDescription)}</b>  " +
        $"<br\\> Created By: <b style=\"font-weight: 700;\">{StripHtmlTags(events.CreatedBy)}</b> " +
        $"<br\\> Created Date: <b style=\"font-weight: 700;\">{StripHtmlTags(events.CreatedDate.ToString())}</b>"
+	   
+	   document.querySelector('.booking-btn').addEventListener('click', function() {
+    // 'this.dataset' automatically maps 'data-date' to 'date', etc.
+    const bookingData = {
+        date: this.dataset.date,
+        id: parseInt(this.dataset.id),
+        bookingId: this.dataset.bookingid
+    };
+
+    console.log("Sending data:", bookingData);
+
+    // Post to C# Backend
+    fetch('/Booking/Update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bookingData)
+    })
+    .then(response => response.json())
+    .then(data => alert("Success!"))
+    .catch(error => console.error('Error:', error));
+});
+
+
+// Define the structure of the incoming data
+public class BookingRequest
+{
+    public string Date { get; set; }
+    public int Id { get; set; }
+    public string BookingId { get; set; }
+}
+
+// In your Controller
+[HttpPost]
+public IActionResult Update([FromBody] BookingRequest model)
+{
+    if (model == null) return BadRequest();
+
+    // Do something with model.BookingId, model.Date, etc.
+    return Ok(new { message = "Data received successfully" });
+}
